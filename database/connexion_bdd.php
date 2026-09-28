@@ -1,6 +1,6 @@
 <?php
 
-class BDD {
+class Database {
     private const $host = 'localhost';
     private const $user = 'root';
     private const $pass = '';
