@@ -6,17 +6,17 @@ class TroupeOpposee {
         $this->city = $city;
     }
 
-    public get_address(); string {
+    public function get_address(): string {
         return $this->address;
     }
-    public get_city(): string {
+    public function get_city(): string {
         return $this->city;
     }
 
-    public set_address(string $address): void {
+    public function set_address(string $address): void {
         $this->address = $addrress;
     }
-    public set_city(string $city): void {
+    public function set_city(string $city): void {
         $this->city = $city;
     }
 }
