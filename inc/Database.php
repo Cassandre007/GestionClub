@@ -26,8 +26,9 @@ class Database {
                 echo "Erreur de connexion : " . $e->getMessage();
                 die();
             }
-        }
         return self::$instance;
         }
     }
+}
 
+?>
