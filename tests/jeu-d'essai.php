@@ -1,10 +1,10 @@
 <?php
-require_once __DIR__ . '/../inc/actor_has_troupe.php';
-require_once __DIR__ . '/../inc/actor.php';
-require_once __DIR__ . '/../inc/face_off.php';
-require_once __DIR__ . '/../inc/staff_members.php';
-require_once __DIR__ . '/../inc/troupe_opposee.php';
-require_once __DIR__ . '/../inc/troupe.php';
+require_once __DIR__ . '/../inc/ActorHasTroupe.php';
+require_once __DIR__ . '/../inc/Actor.php';
+require_once __DIR__ . '/../inc/FaceOff.php';
+require_once __DIR__ . '/../inc/StaffMember.php';
+require_once __DIR__ . '/../inc/TroupeOpposee.php';
+require_once __DIR__ . '/../inc/Troupe.php';
 
 $actor1 = new Actor("Felix","Plus",2005-03-12,"photo1");
 $actor2 = new Actor("Charles","Dumesnil-Mombilliard",2007-05-07,"photo2");
@@ -41,8 +41,3 @@ $faceOff2 = new FaceOff(1, 3, 1, 2026-10-12, $troupe2, "Lyon", $troupeOpposee2);
 $faceOff3 = new FaceOff(1, 3, 1, 2026-10-19, $troupe3, "Marseille", $troupeOpposee3);
 $faceOff4 = new FaceOff(1, 3, 1, 2026-10-26, $troupe4, "Lille", $troupeOpposee4);
 $faceOff5 = new FaceOff(1, 3, 1, 2026-11-02, $troupe5, "Bordeaux", $troupeOpposee5);
-
-
-
-
-

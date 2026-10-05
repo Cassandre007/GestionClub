@@ -8,29 +8,29 @@ class StaffMember {
         $this->role = $role;
     }
 
-    public function get_first_name(): string {
+    public function getFirstName(): string {
         return $this->first_name;
     }
-    public function get_last_name(): string {
+    public function getLastName(): string {
         return $this->last_name;
     }
-    public function get_picture(): string {
+    public function getPicture(): string {
         return $this->picture;
     }
-    public function get_role(): string {
+    public function getRole(): string {
         return $this->role;
     }
 
-    public function set_first_name(string $first_name): void {
+    public function setFirstName(string $first_name): void {
         $this->first_name = $first_name;
     }
-    public function set_last_name(string $last_name): void {
+    public function setLastName(string $last_name): void {
         $this->last_name = $last_name;
     }
-    public function set_picture(string $picture): void {
+    public function setPicture(string $picture): void {
         $this->picture = $picture;
     }
-    public function set_role(string $role): void {
+    public function setRole(string $role): void {
         $this->role = $role;
     }
 }

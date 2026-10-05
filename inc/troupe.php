@@ -4,11 +4,11 @@ class Troupe {
         $this->name = $name;
     }
 
-    public function get_name(): string {
-        return $this->get_name;
+    public function getName(): string {
+        return $this->name;
     }
 
-    public function set_name(string $name): void {
+    public function setName(string $name): void {
         $this->name = $name;
     }
 }
