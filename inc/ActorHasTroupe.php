@@ -23,16 +23,19 @@ class ActorHasTroupe {
         return $this->role;
     }
 
-    public function setActor(Actor $actor): void {
+    public function setActor(Actor $actor): static {
         $this->actor = $actor;
+        return $this;
     }
 
-    public function setTroupe(Troupe $troupe): void {
+    public function setTroupe(Troupe $troupe): static {
         $this->troupe = $troupe;
+        return $this;
     }
 
-    public function setRole(string $role): void {
+    public function setRole(string $role): static {
         $this->role = $role;
+        return $this;
     }
 
 }

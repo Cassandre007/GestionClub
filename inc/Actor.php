@@ -29,20 +29,24 @@ class Actor {
         return $this->picture;
     }
 
-    public function setFirstName($first_name): void {
-        $this->first_name = $first_name ;
+    public function setFirstName(string $first_name): static {
+        $this->first_name = $first_name;
+        return $this;
     }
 
-    public function setLastName($last_name): void {
+    public function setLastName(string $last_name): static {
         $this->last_name = $last_name ;
+        return $this;
     }
 
-    public function setBirthDate($birth_date): void {
+    public function setBirthDate(DateTime $birth_date): static {
         $this->birth_date = $birth_date ;
+        return $this;
     }
 
-    public function setPicture($picture): void {
+    public function setPicture(string $picture): static {
         $this->picture = $picture ;
+        return $this;
     }
 
 }

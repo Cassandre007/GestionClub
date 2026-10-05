@@ -30,23 +30,29 @@ class FaceOff {
     }
 
 
-    public function setTroupeScore(int $troupe_score): void {
+    public function setTroupeScore(int $troupe_score): static {
         $this->troupe_score = $troupe_score;
+        return $this;
     }
-    public function setOpponentScore(int $opponent_score): void {
+    public function setOpponentScore(int $opponent_score): static {
         $this->opponent_score = $opponent_score;
+        return $this;
     }
-    public function setDate(DateTime $date): void {
+    public function setDate(DateTime $date): static {
         $this->date = $date;
+        return $this;
     }
-    public function setTroupe(Troupe $troupe): void {
+    public function setTroupe(Troupe $troupe): static {
         $this->troupe = $troupe;
+        return $this;
     }
-    public function setCity(string $city): void {
+    public function setCity(string $city): static {
         $this->city = $city;
+        return $this;
     }
-    public function setOpposingClub(OpposingClub $opposing_club): void {
+    public function setOpposingClub(OpposingClub $opposing_club): static {
         $this->opposing_club = $opposing_club;
+        return $this;
     }
 }
 

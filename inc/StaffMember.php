@@ -21,17 +21,21 @@ class StaffMember {
         return $this->role;
     }
 
-    public function setFirstName(string $first_name): void {
+    public function setFirstName(string $first_name): static {
         $this->first_name = $first_name;
+        return $this;
     }
-    public function setLastName(string $last_name): void {
+    public function setLastName(string $last_name): static {
         $this->last_name = $last_name;
+        return $this;
     }
-    public function setPicture(string $picture): void {
+    public function setPicture(string $picture): static {
         $this->picture = $picture;
+        return $this;
     }
-    public function setRole(string $role): void {
+    public function setRole(string $role): static {
         $this->role = $role;
+        return $this;
     }
 }
 
