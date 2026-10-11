@@ -1,0 +1,15 @@
+{
+  "name": "gestionclub",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Application de gestion de club de théâtre (PHP + Tailwind CSS + DaisyUI)",
+  "scripts": {
+    "dev": "tailwindcss -i ./src/input.css -o ./public/assets/css/app.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./public/assets/css/app.css --minify"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "daisyui": "^5.7.47",
+    "tailwindcss": "^4.3.3"
+  }
+}

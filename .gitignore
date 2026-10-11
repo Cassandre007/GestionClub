@@ -1,0 +1,20 @@
+# Dépendances Node.js
+node_modules/
+
+# Fichiers compilés (générés par `npm run dev` ou `npm run build`)
+# Supprimez cette ligne si vous préférez versionner le CSS compilé
+public/assets/css/app.css
+
+# Logs
+*.log
+npm-debug.log*
+
+# Variables d'environnement
+.env
+.env.*
+
+# Système / éditeurs
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
