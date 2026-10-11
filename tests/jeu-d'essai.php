@@ -1,10 +1,10 @@
 <?php
-require_once __DIR__ . '/../inc/ActorHasTroupe.php';
-require_once __DIR__ . '/../inc/Actor.php';
-require_once __DIR__ . '/../inc/FaceOff.php';
-require_once __DIR__ . '/../inc/StaffMember.php';
-require_once __DIR__ . '/../inc/TroupeOpposee.php';
-require_once __DIR__ . '/../inc/Troupe.php';
+require_once __DIR__ . '/../inc/class/ActorHasTroupe.php';
+require_once __DIR__ . '/../inc/class/Actor.php';
+require_once __DIR__ . '/../inc/class/FaceOff.php';
+require_once __DIR__ . '/../inc/class/StaffMember.php';
+require_once __DIR__ . '/../inc/class/TroupeOpposee.php';
+require_once __DIR__ . '/../inc/class/Troupe.php';
 require_once __DIR__ . '/../inc/enum/RoleActor.php';
 require_once __DIR__ . '/../inc/enum/RoleStaff.php';
 
