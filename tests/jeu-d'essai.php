@@ -18,11 +18,11 @@ $troupe3 = new Troupe("Malades Imaginaires");
 $troupe4 = new Troupe("Improvisateurs");
 $troupe5 = new Troupe("Antigones");
 
-$actorTroupe1 = new ActorsHasTroupe($actor1,$troupe1,"Narrateur");
-$actorTroupe2 = new ActorsHasTroupe($actor2,$troupe1,"Personnage principal");
-$actorTroupe3 = new ActorsHasTroupe($actor3,$troupe1,"Personnage secondaire");
-$actorTroupe4 = new ActorsHasTroupe($actor4,$troupe2,"Figurants");
-$actorTroupe5 = new ActorsHasTroupe($actor5,$troupe2,"Personnage principal");
+$actorTroupe1 = new ActorsHasTroupe($actor1,$troupe1, RoleActor::Narrateur);
+$actorTroupe2 = new ActorsHasTroupe($actor2,$troupe1, RoleActor::PersonnagePrincipal);
+$actorTroupe3 = new ActorsHasTroupe($actor3,$troupe1, RoleActor::PersonnageSecondaire);
+$actorTroupe4 = new ActorsHasTroupe($actor4,$troupe2, RoleActor::Figurants);
+$actorTroupe5 = new ActorsHasTroupe($actor5,$troupe2, RoleActor::PersonnagePrincipal);
 
 $troupeOpposee1 = new TroupeOpposee("10 rue de Paris","Paris");
 $troupeOpposee2 = new TroupeOpposee("25 rue Victor Hugo","Lyon");
@@ -30,11 +30,11 @@ $troupeOpposee3 = new TroupeOpposee("8 avenue du Stade","Marseille");
 $troupeOpposee4 = new TroupeOpposee("15 rue Nationale","Lille");
 $troupeOpposee5 = new TroupeOpposee("30 boulevard Gambetta","Bordeaux");
 
-$member1 = new StaffMember("Jean", "Dupont", "photo6", "scénariste");
-$member2 = new StaffMember("Cassandre", "Charbon", "photo7", "régisseur lumiere");
-$member3 = new StaffMember("Elena", "Rousset", "photo8", "metteur en scene");
-$member4 = new StaffMember("Léo", "Dicahan", "photo9", "scénariste");
-$member5 = new StaffMember("Hugo", "Moins", "photo10", "metteur en scene");
+$member1 = new StaffMember("Jean", "Dupont", "photo6", RoleStaff::Scénariste);
+$member2 = new StaffMember("Cassandre", "Charbon", "photo7", RoleStaff::RégisseurLumière);
+$member3 = new StaffMember("Elena", "Rousset", "photo8", RoleStaff::MetteurEnScène);
+$member4 = new StaffMember("Léo", "Dicahan", "photo9", RoleStaff::Scénariste);
+$member5 = new StaffMember("Hugo", "Moins", "photo10", RoleStaff::MetteurEnScène);
 
 $faceOff1 = new FaceOff(1, 3, 1, 2026-10-05, $troupe1, "Paris", $troupeOpposee1);
 $faceOff2 = new FaceOff(1, 3, 1, 2026-10-12, $troupe2, "Lyon", $troupeOpposee2);

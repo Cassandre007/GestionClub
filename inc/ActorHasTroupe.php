@@ -3,9 +3,9 @@
 class ActorHasTroupe {
     private Actor $actor;
     private Troupe $troupe;
-    private string $role;
+    private RoleActor $role;
 
-    public function __construct(Actor $actor, Troupe $troupe, string $role) {
+    public function __construct(Actor $actor, Troupe $troupe, RoleActor $role) {
         $this->actor = $actor;
         $this->troupe = $troupe;
         $this->role = $role;
@@ -19,7 +19,7 @@ class ActorHasTroupe {
         return $this->troupe;
     }
 
-    public function getRole(): string {
+    public function getRole(): RoleActor {
         return $this->role;
     }
 
@@ -33,7 +33,7 @@ class ActorHasTroupe {
         return $this;
     }
 
-    public function setRole(string $role): static {
+    public function setRole(RoleActor $role): static {
         $this->role = $role;
         return $this;
     }

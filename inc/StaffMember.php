@@ -1,7 +1,7 @@
 <?php
 
 class StaffMember {
-    public function __construct(private string $first_name, private string $last_name, private string $picture, private string $role){
+    public function __construct(private string $first_name, private string $last_name, private string $picture, private RoleStaff $role){
         $this->first_name = $first_name;
         $this->last_name = $last_name;
         $this->picture = $picture;
@@ -17,7 +17,7 @@ class StaffMember {
     public function getPicture(): string {
         return $this->picture;
     }
-    public function getRole(): string {
+    public function getRole(): RoleStaff {
         return $this->role;
     }
 
@@ -33,7 +33,7 @@ class StaffMember {
         $this->picture = $picture;
         return $this;
     }
-    public function setRole(string $role): static {
+    public function setRole(RoleStaff $role): static {
         $this->role = $role;
         return $this;
     }
