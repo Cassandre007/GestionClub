@@ -14,7 +14,7 @@ class InsertionBDD {
         return $this;
     }
 
-    public function addActor(Actor $actor){
+    public function addActor(Actor $actor): void {
         $requete = $this->pdo->prepare("INSERT INTO actor (first_name, last_name, birth_date, picture) VALUES (:first_name, :last_name, :birth_date, :picture)");
         $requete->bindValue(':first_name', $actor->getFirstName());
         $requete->bindValue(':last_name', $actor->getLastName());
@@ -23,13 +23,13 @@ class InsertionBDD {
         $requete->execute();
     }
 
-    public function addTroupe(Troupe $troupe){
+    public function addTroupe(Troupe $troupe): void {
         $requete = $this->pdo->prepare("INSERT INTO troupe (name) VALUES (:name)");
         $requete->bindValue(':name', $troupe->getName());
         $requete->execute();
     }
 
-    public function addActorHasTroupe(ActorHasTroupe $actorHasTroupe){
+    public function addActorHasTroupe(ActorHasTroupe $actorHasTroupe): void {
         $requete = $this->pdo->prepare("INSERT INTO actor_has_troupe (actor_id, troupe_id, role) VALUES (:actor_id, :troupe_id, :role)");
         $requete->bindValue(':actor_id', $actorHasTroupe->getActor()->getId());
         $requete->bindValue(':troupe_id', $actorHasTroupe->getTroupe()->getId());
@@ -37,7 +37,7 @@ class InsertionBDD {
         $requete->execute();
     }
 
-    public function addStaffMember(StaffMember $staffMember){
+    public function addStaffMember(StaffMember $staffMember): void {
         $requete = $this->pdo->prepare("INSERT INTO staff_member (first_name, last_name, picture, role) VALUES (:first_name, :last_name, :picture, :role)");
         $requete->bindValue(':first_name', $staffMember->getFirstName());
         $requete->bindValue(':last_name', $staffMember->getLastName());
@@ -46,14 +46,14 @@ class InsertionBDD {
         $requete->execute();
     }
 
-    public function addTroupeOpposee(TroupeOpposee $troupeOpposee){
+    public function addTroupeOpposee(TroupeOpposee $troupeOpposee): void {
         $requete = $this->pdo->prepare("INSERT INTO opposing_club (address, city) VALUES (:address, :city)");
         $requete->bindValue(':address', $troupeOpposee->getAddress());
         $requete->bindValue(':city', $troupeOpposee->getCity());
         $requete->execute();
     }
 
-    public function addFaceOff(FaceOff $faceOff){
+    public function addFaceOff(FaceOff $faceOff): void {
         $requete = $this->pdo->prepare("INSERT INTO face_off (troupe_score, opponent_score, date, troupe_id, city, opposing_club_id) VALUES (:troupe_score, :opponent_score, :date, :troupe_id, :city, :opposing_club_id)");
         $requete->bindValue(':troupe_score', $faceOff->getTroupeScore());
         $requete->bindValue(':opponent_score', $faceOff->getOpponentScore());
