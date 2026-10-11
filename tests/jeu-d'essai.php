@@ -5,6 +5,8 @@ require_once __DIR__ . '/../inc/FaceOff.php';
 require_once __DIR__ . '/../inc/StaffMember.php';
 require_once __DIR__ . '/../inc/TroupeOpposee.php';
 require_once __DIR__ . '/../inc/Troupe.php';
+require_once __DIR__ . '/../inc/enum/RoleActor.php';
+require_once __DIR__ . '/../inc/enum/RoleStaff.php';
 
 $actor1 = new Actor("Felix","Plus",2005-03-12,"photo1");
 $actor2 = new Actor("Charles","Dumesnil-Mombilliard",2007-05-07,"photo2");
