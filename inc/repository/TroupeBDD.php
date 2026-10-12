@@ -1,4 +1,5 @@
 <?php 
+require_once __DIR__ . '/../class/Troupe.php';
 
 abstract class TroupeBDD extends PDO {
     public function addTroupe(Troupe $troupe): void {

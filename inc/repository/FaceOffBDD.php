@@ -1,4 +1,5 @@
 <?php 
+require_once __DIR__ . '/../class/FaceOff.php';
 
 abstract class FaceOffBDD extends PDO {
     public function addFaceOff(FaceOff $faceOff): void {

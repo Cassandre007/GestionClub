@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../class/Actor.php';
 
 abstract class ActorBDD extends PDO {
     public function getActor(int $id): Actor {
