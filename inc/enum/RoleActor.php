@@ -6,4 +6,3 @@ enum RoleActor: string {
     case PersonnageSecondaire = "Personnage secondaire";
     case Figurants = "Figurants";
 }
-

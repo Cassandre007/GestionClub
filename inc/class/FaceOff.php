@@ -55,5 +55,3 @@ class FaceOff {
         return $this;
     }
 }
-
-?>
