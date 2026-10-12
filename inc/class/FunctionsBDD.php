@@ -1,6 +1,6 @@
 <?php 
 
-class InsertionBDD {
+abstract class InsertionBDD {
     public function __construct(private PDO $pdo){
         $this->pdo = $pdo;
     }
