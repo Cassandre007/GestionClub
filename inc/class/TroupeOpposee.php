@@ -4,6 +4,7 @@ class TroupeOpposee {
     public function __construct(private string $address, private string $city){
         $this->address = $address;
         $this->city = $city;
+        new InsertionBDD($GLOBALS['pdo'])->addTroupeOpposee($this);
     }
 
     public function getAddress(): string {

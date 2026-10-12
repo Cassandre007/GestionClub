@@ -9,6 +9,7 @@ class ActorHasTroupe {
         $this->actor = $actor;
         $this->troupe = $troupe;
         $this->role = $role;
+        new InsertionBDD($GLOBALS['pdo'])->addActorHasTroupe($this);
     }
 
     public function getActor(): Actor {
