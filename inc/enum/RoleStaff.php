@@ -10,5 +10,3 @@ enum RoleStaff: string {
     case RégisseurLumière = "Régisseur lumière";
     case MetteurEnScène = "Metteur en scène";
 }
-
-?>

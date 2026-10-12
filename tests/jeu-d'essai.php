@@ -43,3 +43,6 @@ $faceOff2 = new FaceOff(1, 3, 1, 2026-10-12, $troupe2, "Lyon", $troupeOpposee2);
 $faceOff3 = new FaceOff(1, 3, 1, 2026-10-19, $troupe3, "Marseille", $troupeOpposee3);
 $faceOff4 = new FaceOff(1, 3, 1, 2026-10-26, $troupe4, "Lille", $troupeOpposee4);
 $faceOff5 = new FaceOff(1, 3, 1, 2026-11-02, $troupe5, "Bordeaux", $troupeOpposee5);
+
+
+// Envoyer les données en base

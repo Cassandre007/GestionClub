@@ -7,4 +7,3 @@ enum RoleActor: string {
     case Figurants = "Figurants";
 }
 
-?>
