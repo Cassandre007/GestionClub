@@ -14,6 +14,54 @@ class InsertionBDD {
         return $this;
     }
 
+    public function getActor(int $id): Actor {
+        $requete = $this->pdo->prepare("SELECT * FROM actor WHERE id = :id");
+        $requete->bindValue(':id', $id);
+        $requete->execute();
+        $result = $requete->fetch(PDO::FETCH_ASSOC);
+        return new Actor($result['id'], $result['first_name'], $result['last_name'], new DateTime($result['birth_date']), $result['picture']);
+    }
+
+    public function getTroupe(int $id): Troupe {
+        $requete = $this->pdo->prepare("SELECT * FROM troupe WHERE id = :id");
+        $requete->bindValue(':id', $id);
+        $requete->execute();
+        $result = $requete->fetch(PDO::FETCH_ASSOC);
+        return new Troupe($result['id'], $result['name']);
+    }
+
+    public function getActorHasTroupe(int $id): ActorHasTroupe {
+        $requete = $this->pdo->prepare("SELECT * FROM actor_has_troupe WHERE id = :id");
+        $requete->bindValue(':id', $id);
+        $requete->execute();
+        $result = $requete->fetch(PDO::FETCH_ASSOC);
+        return new ActorHasTroupe($result['id'], $result['actor_id'], $result['troupe_id'], $result['role']);
+    }
+
+    public function getStaffMember(int $id): StaffMember {
+        $requete = $this->pdo->prepare("SELECT * FROM staff_member WHERE id = :id");
+        $requete->bindValue(':id', $id);
+        $requete->execute();
+        $result = $requete->fetch(PDO::FETCH_ASSOC);
+        return new StaffMember($result['id'], $result['first_name'], $result['last_name'], $result['picture'], $result['role']);
+    }
+
+    public function getTroupeOpposee(int $id): TroupeOpposee {
+        $requete = $this->pdo->prepare("SELECT * FROM opposing_club WHERE id = :id");
+        $requete->bindValue(':id', $id);
+        $requete->execute();
+        $result = $requete->fetch(PDO::FETCH_ASSOC);
+        return new TroupeOpposee($result['id'], $result['address'], $result['city']);
+    }
+
+    public function getFaceOff(int $id): FaceOff {
+        $requete = $this->pdo->prepare("SELECT * FROM face_off WHERE id = :id");
+        $requete->bindValue(':id', $id);
+        $requete->execute();
+        $result = $requete->fetch(PDO::FETCH_ASSOC);
+        return new FaceOff($result['id'], $result['troupe_score'], $result['opponent_score'], new DateTime($result['date']), $result['troupe_id'], $result['city'], $result['opposing_club_id']);
+    }
+
     public function addActor(Actor $actor): void {
         $requete = $this->pdo->prepare("INSERT INTO actor (first_name, last_name, birth_date, picture) VALUES (:first_name, :last_name, :birth_date, :picture)");
         $requete->bindValue(':first_name', $actor->getFirstName());
