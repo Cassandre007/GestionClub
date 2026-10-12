@@ -11,6 +11,7 @@ class Actor {
         $this->last_name = $last_name;
         $this->birth_date = $birth_date;
         $this->picture = $picture;
+        new InsertionBDD($GLOBALS['pdo'])->addActor($this);
     }
 
     public function getFirstName(): string {
