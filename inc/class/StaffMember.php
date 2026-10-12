@@ -6,7 +6,6 @@ class StaffMember {
         $this->last_name = $last_name;
         $this->picture = $picture;
         $this->role = $role;
-        new InsertionBDD($GLOBALS['pdo'])->addStaffMember($this);
     }
 
     public function getFirstName(): string {

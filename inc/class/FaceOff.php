@@ -8,7 +8,6 @@ class FaceOff {
         $this->troupe = $troupe;
         $this->city = $city;
         $this->opposing_club = $opposing_club;
-        new InsertionBDD($GLOBALS['pdo'])->addFaceOff($this);
     }
 
     public function getTroupeScore(): int {
