@@ -13,4 +13,13 @@ enum RoleStaff: string {
     case Tresoriere = "Trésorière";
     case Arbitre = "Arbitre";
     case TechnicienSonEtLumiere = "Technicien son et lumière";
+
+    public static function tryFromName(string $name): ?self {
+        foreach (self::cases() as $case) {
+            if ($case->name === $name) {
+                return $case;
+            }
+        }
+        return null;
+    }
 }

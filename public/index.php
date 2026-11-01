@@ -41,8 +41,8 @@ if($listActors!= null) {
             <div class= "space-y-2">
                 <div><?= $actor->getFirstName() . ' ' . $actor->getLastName(); ?></div>
                 <div class="text-xs uppercase font-semibold opacity-60"><?= $actor->getBirthDate()->format('d/m/Y'); ?></div>
-
             </div>
+            <a class="btn btn-ghost" href="updateActor.php?id=<?= $actor->getId(); ?>">Editer</a>
         </li>
     <?php
     }
@@ -85,13 +85,13 @@ if($listTroupes!= null) {
                     if($listMembresTroupes!= null) { 
                         foreach ($listMembresTroupes as $troupeMembre) {
                 ?>
-                        <div class="text-xs uppercase font-semibold opacity-60"><?= $troupeMembre->getActor()->getFirstName() . ' ' . $troupeMembre->getActor()->getLastName() . ' :  ' . $troupeMembre->getRole()->value; ?></div>
+                        <div class="text-xs uppercase font-semibold opacity-60"><?= $troupeMembre->getActor()->getFirstName() . ' ' . $troupeMembre->getActor()->getLastName() . ' :  ' . $troupeMembre->getRole()->value; ?><a class="pl-4" href="updateActorHasTroupe.php?troupe_id=<?= $troupe->getId(); ?>&actor_id=<?= $troupeMembre->getActor()->getId(); ?>"> Editer</a> </div>
                 <?php
                         }
                     }
-                ?>
-                <a class="btn btn-ghost" href="addActorToTroupe.php?troupe_id=<?= $troupe->getId() ?>">Ajouter un acteur à cette troupe</a>
+                ?>   
             </div>
+            <a class="btn btn-ghost" href="updateTroupe.php?id=<?= $troupe->getId(); ?>">Editer</a>
         </li>
     <?php
     }
@@ -111,6 +111,7 @@ else{
 ?>
 <div class="w-3/4 mx-auto">
     <a class="btn btn-ghost" href="addTroupe.php">Ajouter une troupe</a>
+    <a class="btn btn-ghost" href="addActorHasTroupe.php">Ajouter un acteur à une troupe</a>
 </div>
 
 <?php // TROUPES OPOSEES?>
@@ -130,7 +131,6 @@ if($listTroupesOpposees!= null) {
             <div class= "space-y-2">
                 <div><?= $troupeOpposee->getAddress(); ?></div>
                 <div class="text-xs uppercase font-semibold opacity-60"><?= $troupeOpposee->getCity(); ?></div>
-
             </div>
         </li>
     <?php

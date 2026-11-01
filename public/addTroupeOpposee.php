@@ -4,52 +4,40 @@ declare(strict_types=1);
 require_once __DIR__ . '/../autoload.php';
 require_once __DIR__ . '/../inc/Header.php';
 
-$pdo = Database::connexionBdd();
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $post = $_POST;
-    $first_name = $post['first_name'] ?? null;
-    $last_name = $post['last_name'] ?? null;
-    $birth_date = $post['birth_date'] ?? null;
-    $picture = $post['picture'] ?? null;
+    $address = $post['address'] ?? null;
+    $city = $post['city'] ?? null;
 
-    if ($prenom !== null && $nom !== null && $date_naissance !== null) {
-        $actor = new Actor($first_name, $last_name, new DateTime($birth_date), $picture );
-        $actorManager->addActor($actor);
+    if ($address !== null && $city !== null) {
+        $troupeOpposee = new TroupeOpposee(0, $address, $city);
+        TroupeOpposeeBDD::addTroupeOpposee($troupeOpposee);
+
         header("Location: index.php");
         exit;
     }
-    header("Location: addActor.php");
+
+    header("Location: addTroupeOpposee.php");
     exit;
 }
 
 ?>
 
 <div class="w-1/5 mx-auto">
-    <h2 class="collapse-title font-semibold ">Ajouter un acteur</h2>
+    <h2 class="collapse-title font-semibold ">Ajouter une troupe opposée</h2>
 
     <form method="post" action="" class="space-y-4">
         <label class="floating-label">
-            <span>Prénom</span>
-            <input id="first_name" name="first_name" type="text" placeholder="Prénom" class="input input-bordered w-full" />
+            <span>Adresse</span>
+            <input id="address" name="address" type="text" placeholder="Adresse" class="input input-bordered w-full" />
         </label>
 
         <label class="floating-label">
-            <span>Nom</span>
-            <input id="last_name" name="last_name" type="text" placeholder="Nom" class="input input-bordered w-full" />
+            <span>Ville</span>
+            <input id="city" name="city" type="text" placeholder="Ville" class="input input-bordered w-full" />
         </label>
 
-        <label class="input input-bordered w-full">
-            <span class="label">Date de naissance</span>
-            <input id="birth_date" name="birth_date" type="date" />
-        </label>
-
-        <label class="floating-label">
-            <span>Photo</span>
-            <input id="picture" name="picture" type="text" placeholder="URL de la photo (facultatif)" class="input input-bordered w-full" />
-        </label>
-
-        <button type="submit" class="btn btn-block  btn-neutral">Ajouter l'acteur </button>
+        <button type="submit" class="btn btn-block  btn-neutral">Ajouter la troupe opposée</button>
 
     </form>
 </div>

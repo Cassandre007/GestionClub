@@ -10,7 +10,7 @@ abstract class StaffMembersBDD extends BaseBDD {
             if ($result === null) {
                 throw new RuntimeException("Aucun membre du personnel trouvé avec l'ID : $id");
             }
-            return new StaffMember($result['id'], $result['firstname'], $result['lastname'], $result['picture'], RoleStaff::from($result['role']));
+            return new StaffMember($result['id'], $result['firstname'], $result['lastname'], $result['picture'], RoleStaff::{$result['role']});
         } catch (Exception $e) {
             echo "Erreur lors de la récupération du membre du personnel : " . $e->getMessage();
             die();
@@ -24,7 +24,7 @@ abstract class StaffMembersBDD extends BaseBDD {
             $results = $requete->fetchAll(PDO::FETCH_ASSOC);
             $staffMembers = [];
             foreach ($results as $result) {
-                $staffMembers[] = new StaffMember($result['id'], $result['firstname'], $result['lastname'], $result['picture'], RoleStaff::from($result['role']));
+                $staffMembers[] = new StaffMember($result['id'], $result['firstname'], $result['lastname'], $result['picture'], RoleStaff::{$result['role']});
             }
             return $staffMembers;
         } catch (Exception $e) {
@@ -39,7 +39,7 @@ abstract class StaffMembersBDD extends BaseBDD {
             $requete->bindValue(':firstname', $staffMember->getFirstName());
             $requete->bindValue(':lastname', $staffMember->getLastName());
             $requete->bindValue(':picture', $staffMember->getPicture());
-            $requete->bindValue(':role', $staffMember->getRole()->value);
+            $requete->bindValue(':role', $staffMember->getRole()->name);
             $requete->execute();
         } catch (Exception $e) {
             throw new Exception("Erreur lors de l'ajout du membre du personnel : " . $e->getMessage());
