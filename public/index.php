@@ -12,8 +12,7 @@ require_once __DIR__ . '/../inc/class/Database.php';
 require_once __DIR__ . '/../inc/Header.php';
 
 $listActors = ActorBDD::getAllActors();
-$listActorsHasTroupes =ActorHasTroupeBDD::getAllActorsHasTroupes(); ;
-$listFaceOffs = FaceOffBDD::getAllFaceOffs(); ;
+$listFaceOffs = FaceOffBDD::getAllFaceOffs(); 
 $listStaffMembers = StaffMembersBDD::getAllStaffMembers();
 $listTroupes = TroupeBDD::getAllTroupes();
 $listTroupesOpposees = TroupeOpposeeBDD::getAllTroupesOpposees();
@@ -23,6 +22,9 @@ $listTroupesOpposees = TroupeOpposeeBDD::getAllTroupesOpposees();
 <div class="w-3/4 mx-auto">
     <h1 class="collapse-title font-semibold">Bienvenue!</h1>
 </div>
+
+<?php // ACTORS?>
+
 <?php
 if($listActors!= null) {
 ?>
@@ -45,7 +47,7 @@ if($listActors!= null) {
             </div>
             <div class= "space-y-2">
                 <div><?= $actor->getFirstName() . ' ' . $actor->getLastName(); ?></div>
-                <div class="text-xs uppercase font-semibold opacity-60"><?= $actor->getBirthDate(); ?></div>
+                <div class="text-xs uppercase font-semibold opacity-60"><?= $actor->getBirthDate()->format('d/m/Y'); ?></div>
 
             </div>
         </li>
@@ -69,6 +71,188 @@ else{
     <a class="btn btn-ghost" href="addActor.php">Ajouter un acteur</a>
 </div>
 
+<?php // TROUPES?>
+
+<?php
+if($listTroupes!= null) {
+?>
+<div class="w-3/4 mx-auto">
+    <ul class="list bg-base-100 rounded-box shadow-md">
+    
+    <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Liste des troupes</li>
+    <?php
+    foreach ($listTroupes as $troupe) {
+    ?> 
+        <li class="list-row">
+            <div class = "w-32"></div>
+            <div class= "space-y-2">
+                <div><?= $troupe->getName(); ?></div>
+                <?php
+                    $listMembresTroupes = ActorHasTroupeBDD::getAllActorsHasTroupes($troupe->getId());
+                    if($listMembresTroupes!= null) { 
+                        foreach ($listMembresTroupes as $troupeMembre) {
+                ?>
+                        <div class="text-xs uppercase font-semibold opacity-60"><?= $troupeMembre->getActor()->getFirstName() . ' ' . $troupeMembre->getActor()->getLastName() . ' :  ' . $troupeMembre->getRole()->value; ?></div>
+                <?php
+                        }
+                    }
+                ?>
+                <a class="btn btn-ghost" href="addActorToTroupe.php?troupe_id=<?= $troupe->getId() ?>">Ajouter un acteur à cette troupe</a>
+            </div>
+        </li>
+    <?php
+    }
+    ?>
+    </ul>
+</div>
+<?php
+} 
+else{
+?>
+<div class="w-3/4 mx-auto">
+    <p class="collapse-title font-semibold">Il n'y a pas de troupe enregistrée</p>
+</div>
+
+<?php
+}
+?>
+<div class="w-3/4 mx-auto">
+    <a class="btn btn-ghost" href="addTroupe.php">Ajouter une troupe</a>
+</div>
+
+<?php // TROUPES OPOSEES?>
+
+<?php
+if($listTroupesOpposees!= null) {
+?>
+<div class="w-3/4 mx-auto">
+    <ul class="list bg-base-100 rounded-box shadow-md">
+    
+    <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Liste des troupes opposées</li>
+    <?php
+    foreach ($listTroupesOpposees as $troupeOpposee) {
+    ?> 
+        <li class="list-row">
+            <div class = "w-32"></div>
+            <div class= "space-y-2">
+                <div><?= $troupeOpposee->getAddress(); ?></div>
+                <div class="text-xs uppercase font-semibold opacity-60"><?= $troupeOpposee->getCity(); ?></div>
+
+            </div>
+        </li>
+    <?php
+    }
+    ?>
+    </ul>
+</div>
+<?php
+} 
+else{
+?>
+<div class="w-3/4 mx-auto">
+    <p class="collapse-title font-semibold">Il n'y a pas de troupe opposée enregistrée</p>
+</div>
+
+<?php
+}
+?>
+<div class="w-3/4 mx-auto">
+    <a class="btn btn-ghost" href="addTroupeOpposee.php">Ajouter une troupe opposée</a>
+</div>
+
+<?php // FACEOFFS?>
+
+<?php
+if($listFaceOffs!= null) {
+?>
+<div class="w-3/4 mx-auto">
+    <ul class="list bg-base-100 rounded-box shadow-md">
+    
+    <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Liste des battles</li>
+    <?php
+    foreach ($listFaceOffs as $faceOff) {
+    ?> 
+        <li class="list-row">
+            <div class = "w-32">
+                <div>
+                    <span class="collapse-title font-semibold" ><?= $faceOff->getCity(); ?></span>
+                </div>
+            </div>
+            <div class= "space-y-2">
+                <div><?= $faceOff->getTroupe()->getName() . ' vs ' . $faceOff->getOpposingClub()->getCity(); ?></div>
+                <div class="text-xs uppercase font-semibold opacity-60"><?= $faceOff->getDate()->format('d/m/Y'); ?></div>
+            </div>
+            <div class= "space-y-2">
+                <div class="text-xs uppercase font-semibold opacity-60"><?= $faceOff->getTroupeScore() . ' / ' . $faceOff->getOpponentScore(); ?></div>
+            </div>
+        </li>
+    <?php
+    }
+    ?>
+    </ul>
+</div>
+<?php
+} 
+else{
+?>
+<div class="w-3/4 mx-auto">
+    <p class="collapse-title font-semibold">Il n'y a pas de battle enregistré</p>
+</div>
+
+<?php
+}
+?>
+<div class="w-3/4 mx-auto">
+    <a class="btn btn-ghost" href="addFaceOff.php">Ajouter un battle</a>
+</div>
+
+<?php // STAFF MEMBERS?>
+
+<?php
+if($listStaffMembers!= null) {
+?>
+<div class="w-3/4 mx-auto">
+    <ul class="list bg-base-100 rounded-box shadow-md">
+    
+    <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Liste des membres du staff</li>
+    <?php
+    foreach ($listStaffMembers as $staffMember) {
+    ?> 
+        <li class="list-row">
+            <div class = "w-32">
+            <?php
+                if ($staffMember->getPicture() != null) {
+            ?>
+                <img class="rounded-xl" alt="" src="<?= $staffMember->getPicture(); ?>"/>
+            <?php
+                }
+            ?>
+            </div>
+            <div class= "space-y-2">
+                <div><?= $staffMember->getFirstName() . ' ' . $staffMember->getLastName(); ?></div>
+                <div class="text-xs uppercase font-semibold opacity-60"><?= $staffMember->getRole()->value ?></div>
+
+            </div>
+        </li>
+    <?php
+    }
+    ?>
+    </ul>
+</div>
+<?php
+} 
+else{
+?>
+<div class="w-3/4 mx-auto">
+    <p class="collapse-title font-semibold">Il n'y a pas de membre du staff enregistré</p>
+</div>
+
+<?php
+}
+?>
+<div class="w-3/4 mx-auto">
+    <a class="btn btn-ghost" href="addStaffMember.php">Ajouter un membre du staff</a>
+</div>
 
 
 <?php require __DIR__ . '/../inc/Footer.php'; ?>

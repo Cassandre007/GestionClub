@@ -4,7 +4,7 @@ class FaceOff {
     public function __construct(private int $id, private int $troupe_score, private int $opponent_score, private DateTime $date, private Troupe $troupe, private string $city, private TroupeOpposee $opposing_club){
         $this->id = $id;
         $this->troupe_score = $troupe_score;
-        $this->opponent_score = $troupe_score;
+        $this->opponent_score = $opponent_score;
         $this->date = $date;
         $this->troupe = $troupe;
         $this->city = $city;
@@ -30,7 +30,7 @@ class FaceOff {
     public function getCity(): string {
         return $this->city;
     }
-    public function getOpposingClub(): OpposingClub {
+    public function getOpposingClub(): TroupeOpposee {
         return $this->opposing_club;
     }
 
