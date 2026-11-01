@@ -5,7 +5,8 @@
   "description": "Application de gestion de club de théâtre (PHP + Tailwind CSS + DaisyUI)",
   "scripts": {
     "dev": "tailwindcss -i ./src/input.css -o ./public/assets/css/app.css --watch",
-    "build": "tailwindcss -i ./src/input.css -o ./public/assets/css/app.css --minify"
+    "build": "tailwindcss -i ./src/input.css -o ./public/assets/css/app.css --minify",
+    "build:css": "npx @tailwindcss/cli -i src/input.css -o public/css/output.css --watch"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",

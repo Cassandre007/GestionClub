@@ -1,16 +1,22 @@
 <?php
 
 class Actor {
+    protected int $id;
     protected string $first_name;
     protected string $last_name;
     protected DateTime $birth_date;
     protected string $picture;
 
-    public function __construct(string $first_name, string $last_name, DateTime $birth_date, string $picture) {
+    public function __construct(int $id, string $first_name, string $last_name, DateTime $birth_date, string $picture) {
+        $this->id = $id;
         $this->first_name = $first_name;
         $this->last_name = $last_name;
         $this->birth_date = $birth_date;
         $this->picture = $picture;
+    }
+
+    public function getId(): int {
+        return $this->id;
     }
 
     public function getFirstName(): string {

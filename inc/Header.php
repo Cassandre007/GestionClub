@@ -1,4 +1,6 @@
 <?php 
+declare(strict_types=1);
+
 require_once __DIR__ . '/class/ActorHasTroupe.php';
 require_once __DIR__ . '/class/Actor.php';
 require_once __DIR__ . '/class/FaceOff.php';
@@ -7,28 +9,23 @@ require_once __DIR__ . '/class/TroupeOpposee.php';
 require_once __DIR__ . '/class/Troupe.php';
 require_once __DIR__ . '/enum/RoleActor.php';
 require_once __DIR__ . '/enum/RoleStaff.php';
-
 ?>
 
 <!DOCTYPE html>
-<html lang="fr" data-theme="light">
+<html lang="fr"  >
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GestionClub</title>
-    <link rel="stylesheet" href="assets/css/app.css">
-</head>
-<body class="min-h-screen bg-base-200">
+    <link href="css/output.css" rel="stylesheet">
 
-    <div class="navbar bg-base-100 shadow-sm">
+</head>
+<body class="bg-base-100 text-base-content space-y-8">
+<header>
+    <div class="navbar bg-neutral shadow-sm">
         <div class="flex-1">
-            <span class="btn btn-ghost text-xl">GestionClub</span>
-        </div>
-        <div class="flex-none">
-            <ul class="menu menu-horizontal px-1">
-                <li><a>Troupes</a></li>
-                <li><a>Acteurs</a></li>
-                <li><a>Représentations</a></li>
-            </ul>
+            <a href="index.php" class="btn btn-ghost text-xl text-neutral-content ">GestionClub</a>
         </div>
     </div>
+</header>
+<main class= "space-y-8">

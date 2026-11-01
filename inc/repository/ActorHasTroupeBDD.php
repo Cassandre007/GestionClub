@@ -1,26 +1,47 @@
 <?php
 require_once __DIR__ . '/../class/ActorHasTroupe.php';
+require_once __DIR__ . '/../enum/RoleActor.php';
+require_once __DIR__ . '/ActorBDD.php';
+require_once __DIR__ . '/TroupeBDD.php';
+require_once __DIR__ . '/BaseBDD.php';
 
-abstract class ActorHasTroupeBDD extends PDO {
-    public function getActorHasTroupe(int $id): ActorHasTroupe {
+abstract class ActorHasTroupeBDD extends BaseBDD {
+    public static function getActorHasTroupe(int $actor_id, int $troupe_id): ActorHasTroupe {
         try{
-            $requete = $this->pdo->prepare("SELECT * FROM actor_has_troupe WHERE id = :id");
-            $requete->bindValue(':id', $id);
+            $requete = self::pdo()->prepare("SELECT * FROM actors_has_troupe WHERE actor_id = :actor_id AND troupe_id = :troupe_id");
+            $requete->bindValue(':actor_id', $actor_id);
+            $requete->bindValue(':troupe_id', $troupe_id);
             $requete->execute();
             $result = $requete->fetch(PDO::FETCH_ASSOC);
             if ($result === null) {
-                throw new RuntimeException("Aucun acteur trouvé dans la troupe avec l'ID : $id");
+                throw new RuntimeException("Aucun association acteur troupe trouvé");
             }
-            return new ActorHasTroupe($result['id'], $result['actor_id'], $result['troupe_id'], $result['role']);
+            return new ActorHasTroupe(ActorBDD::getActor($result['actor_id']), TroupeBDD::getTroupe($result['troupe_id']), RoleActor::from($result['role']));
         } catch (Exception $e) {
             echo "Erreur lors de la récupération de l'acteur dans la troupe : " . $e->getMessage();
             die();
         }
     }
 
-    public function addActorHasTroupe(ActorHasTroupe $actorHasTroupe): void {
+    public static function getAllActorsHasTroupes(): array {
         try {
-            $requete = $this->pdo->prepare("INSERT INTO actor_has_troupe (actor_id, troupe_id, role) VALUES (:actor_id, :troupe_id, :role)");
+            $requete = self::pdo()->prepare("SELECT * FROM actors_has_troupe");
+            $requete->execute();
+            $results = $requete->fetchAll(PDO::FETCH_ASSOC);
+            $actorsHasTroupes = [];
+            foreach ($results as $result) {
+                $actorsHasTroupes[] = new ActorHasTroupe(ActorBDD::getActor($result['actor_id']), TroupeBDD::getTroupe($result['troupe_id']), RoleActor::from($result['role']));
+            }
+            return $actorsHasTroupes;
+        } catch (Exception $e) {
+            echo "Erreur lors de la récupération des acteurs dans les troupes : " . $e->getMessage();
+            die();
+        }
+    }
+
+    public static function addActorHasTroupe(ActorHasTroupe $actorHasTroupe): void {
+        try {
+            $requete = self::pdo()->prepare("INSERT INTO actors_has_troupe (actor_id, troupe_id, role) VALUES (:actor_id, :troupe_id, :role)");
             $requete->bindValue(':actor_id', $actorHasTroupe->getActor()->getId());
             $requete->bindValue(':troupe_id', $actorHasTroupe->getTroupe()->getId());
             $requete->bindValue(':role', $actorHasTroupe->getRole());
