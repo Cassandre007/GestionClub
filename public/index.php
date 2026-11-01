@@ -244,7 +244,7 @@ else{
 }
 ?>
 <div class="w-3/4 mx-auto">
-    <a class="btn btn-ghost" href="addStaffMember.php">Ajouter un membre du staff</a>
+    <a class="btn btn-ghost" href="addStaffmember.php">Ajouter un membre du staff</a>
 </div>
 
 

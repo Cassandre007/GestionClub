@@ -4,54 +4,59 @@ declare(strict_types=1);
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../inc/Header.php';
 
-$pdo = Database::connexionBdd();
+$errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $post = $_POST;
-    $first_name = $post['first_name'] ?? null;
-    $last_name = $post['last_name'] ?? null;
-    $birth_date = $post['birth_date'] ?? null;
-    $picture = $post['picture'] ?? null;
+    $troupeId      = filter_var($_POST['troupe_id'] ?? '', FILTER_VALIDATE_INT);
+    $opponentId    = filter_var($_POST['opponent_id'] ?? '', FILTER_VALIDATE_INT);
+    $troupeScore   = filter_var($_POST['troupe_score'] ?? '', FILTER_VALIDATE_INT);
+    $opponentScore = filter_var($_POST['opponent_score'] ?? '', FILTER_VALIDATE_INT);
+    $city          = trim($_POST['city'] ?? '');
+    $date          = trim($_POST['date'] ?? '');
 
-    if ($prenom !== null && $nom !== null && $date_naissance !== null) {
-        $actor = new Actor($first_name, $last_name, new DateTime($birth_date), $picture );
-        $actorManager->addActor($actor);
-        header("Location: index.php");
-        exit;
+    if ($troupeId === false || $troupeId <= 0) {
+        $errors[] = "Il faut choisir la troupe du club.";
     }
-    header("Location: addActor.php");
-    exit;
+    if ($opponentId === false || $opponentId <= 0) {
+        $errors[] = "Il faut choisir la troupe opposée.";
+    }
+    if ($troupeScore === false || $troupeScore < 0) {
+        $errors[] = "Le score de la troupe est invalide.";
+    }
+    if ($opponentScore === false || $opponentScore < 0) {
+        $errors[] = "Le score de la troupe opposée est invalide.";
+    }
+    if ($city === '') {
+        $errors[] = "La ville est obligatoire.";
+    }
+    $battleDate = DateTime::createFromFormat('Y-m-d', $date);
+    if ($date === '' || $battleDate === false || $battleDate->format('Y-m-d') !== $date) {
+        $errors[] = "La date du battle est invalide.";
+    }
+
+    if (empty($errors)) {
+        try {
+            $faceOff = new FaceOff(
+                0,
+                $troupeScore,
+                $opponentScore,
+                $battleDate,
+                TroupeBDD::getTroupe($troupeId),
+                $city,
+                TroupeOpposeeBDD::getTroupeOpposee($opponentId)
+            );
+            FaceOffBDD::addFaceOff($faceOff);
+            header("Location: index.php");
+            exit;
+        } catch (Exception $e) {
+            $errors[] = "Erreur lors de l'ajout du battle : " . $e->getMessage();
+        }
+    }
 }
 
-?>
+$listTroupes         = TroupeBDD::getAllTroupes();
+$listTroupesOpposees = TroupeOpposeeBDD::getAllTroupesOpposees();
 
-<div class="w-1/5 mx-auto">
-    <h2 class="collapse-title font-semibold ">Ajouter un acteur</h2>
+require_once __DIR__ . '/../inc/views/formFaceOff.php';
+require_once __DIR__ . '/../inc/Footer.php';
 
-    <form method="post" action="" class="space-y-4">
-        <label class="floating-label">
-            <span>Prénom</span>
-            <input id="first_name" name="first_name" type="text" placeholder="Prénom" class="input input-bordered w-full" />
-        </label>
-
-        <label class="floating-label">
-            <span>Nom</span>
-            <input id="last_name" name="last_name" type="text" placeholder="Nom" class="input input-bordered w-full" />
-        </label>
-
-        <label class="input input-bordered w-full">
-            <span class="label">Date de naissance</span>
-            <input id="birth_date" name="birth_date" type="date" />
-        </label>
-
-        <label class="floating-label">
-            <span>Photo</span>
-            <input id="picture" name="picture" type="text" placeholder="URL de la photo (facultatif)" class="input input-bordered w-full" />
-        </label>
-
-        <button type="submit" class="btn btn-block  btn-neutral">Ajouter l'acteur </button>
-
-    </form>
-</div>
-
-<?php require __DIR__ . '/../inc/Footer.php'; ?>

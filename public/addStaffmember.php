@@ -4,54 +4,36 @@ declare(strict_types=1);
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../inc/Header.php';
 
-$pdo = Database::connexionBdd();
+$errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $post = $_POST;
-    $first_name = $post['first_name'] ?? null;
-    $last_name = $post['last_name'] ?? null;
-    $birth_date = $post['birth_date'] ?? null;
-    $picture = $post['picture'] ?? null;
+    $first_name = trim($_POST['first_name'] ?? '');
+    $last_name  = trim($_POST['last_name'] ?? '');
+    $picture    = trim($_POST['picture'] ?? '');
+    $role       = RoleStaff::tryFrom((string)($_POST['role'] ?? ''));
 
-    if ($prenom !== null && $nom !== null && $date_naissance !== null) {
-        $actor = new Actor($first_name, $last_name, new DateTime($birth_date), $picture );
-        $actorManager->addActor($actor);
-        header("Location: index.php");
-        exit;
+    if ($first_name === '') {
+        $errors[] = "Le prénom est obligatoire.";
     }
-    header("Location: addActor.php");
-    exit;
+    if ($last_name === '') {
+        $errors[] = "Le nom est obligatoire.";
+    }
+    if ($role === null) {
+        $errors[] = "Le rôle est invalide.";
+    }
+
+    if (empty($errors)) {
+        $staffMember = new StaffMember(0, $first_name, $last_name, $picture, $role);
+        try {
+            StaffMembersBDD::addStaffMember($staffMember);
+            header("Location: index.php");
+            exit;
+        } catch (Exception $e) {
+            $errors[] = "Erreur lors de l'ajout du membre du staff : " . $e->getMessage();
+        }
+    }
 }
 
-?>
+require_once __DIR__ . '/../inc/views/formStaffmember.php';
+require_once __DIR__ . '/../inc/Footer.php';
 
-<div class="w-1/5 mx-auto">
-    <h2 class="collapse-title font-semibold ">Ajouter un acteur</h2>
-
-    <form method="post" action="" class="space-y-4">
-        <label class="floating-label">
-            <span>Prénom</span>
-            <input id="first_name" name="first_name" type="text" placeholder="Prénom" class="input input-bordered w-full" />
-        </label>
-
-        <label class="floating-label">
-            <span>Nom</span>
-            <input id="last_name" name="last_name" type="text" placeholder="Nom" class="input input-bordered w-full" />
-        </label>
-
-        <label class="input input-bordered w-full">
-            <span class="label">Date de naissance</span>
-            <input id="birth_date" name="birth_date" type="date" />
-        </label>
-
-        <label class="floating-label">
-            <span>Photo</span>
-            <input id="picture" name="picture" type="text" placeholder="URL de la photo (facultatif)" class="input input-bordered w-full" />
-        </label>
-
-        <button type="submit" class="btn btn-block  btn-neutral">Ajouter l'acteur </button>
-
-    </form>
-</div>
-
-<?php require __DIR__ . '/../inc/Footer.php'; ?>
