@@ -1,8 +1,7 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/../inc/repository/ActorBDD.php';
-require_once __DIR__ . '/../inc/class/Database.php';
+require_once __DIR__ . '/../autoload.php';
 require_once __DIR__ . '/../inc/Header.php';
 
 $pdo = Database::connexionBdd();

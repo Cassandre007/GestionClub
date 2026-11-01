@@ -1,6 +1,4 @@
-<?php 
-require_once __DIR__ . '/../class/Troupe.php';
-require_once __DIR__ . '/BaseBDD.php';
+<?php
 
 abstract class TroupeBDD extends BaseBDD {
     public static function addTroupe(Troupe $troupe): void {

@@ -1,14 +1,7 @@
-<?php 
+<?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/class/ActorHasTroupe.php';
-require_once __DIR__ . '/class/Actor.php';
-require_once __DIR__ . '/class/FaceOff.php';
-require_once __DIR__ . '/class/StaffMember.php';
-require_once __DIR__ . '/class/TroupeOpposee.php';
-require_once __DIR__ . '/class/Troupe.php';
-require_once __DIR__ . '/enum/RoleActor.php';
-require_once __DIR__ . '/enum/RoleStaff.php';
+require_once __DIR__ . '/../autoload.php';
 ?>
 
 <!DOCTYPE html>

@@ -9,4 +9,8 @@ enum RoleStaff: string {
     case Scenariste = "Scénariste";
     case RegisseurLumiere = "Régisseur lumière";
     case MetteurEnScene = "Metteur en scène";
+    case Presidente = "Présidente";
+    case Tresoriere = "Trésorière";
+    case Arbitre = "Arbitre";
+    case TechnicienSonEtLumiere = "Technicien son et lumière";
 }
