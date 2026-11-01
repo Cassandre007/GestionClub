@@ -1,14 +1,7 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/../inc/repository/ActorBDD.php';
-require_once __DIR__ . '/../inc/repository/ActorHasTroupeBDD.php';
-require_once __DIR__ . '/../inc/repository/FaceOffBDD.php';
-require_once __DIR__ . '/../inc/repository/StaffMemberBDD.php';
-require_once __DIR__ . '/../inc/repository/TroupeBDD.php';
-require_once __DIR__ . '/../inc/repository/TroupeOpposeeBDD.php';
-
-require_once __DIR__ . '/../inc/class/Database.php';
+require_once __DIR__ . '/../autoload.php';
 require_once __DIR__ . '/../inc/Header.php';
 
 $listActors = ActorBDD::getAllActors();

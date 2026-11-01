@@ -55,7 +55,7 @@ class FaceOff {
         $this->city = $city;
         return $this;
     }
-    public function setOpposingClub(OpposingClub $opposing_club): static {
+    public function setOpposingClub(TroupeOpposee $opposing_club): static {
         $this->opposing_club = $opposing_club;
         return $this;
     }

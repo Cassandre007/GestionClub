@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__ . '/../class/Actor.php';
-require_once __DIR__ . '/BaseBDD.php';
 
 abstract class ActorBDD extends BaseBDD {
     public static function getActor(int $id): Actor {

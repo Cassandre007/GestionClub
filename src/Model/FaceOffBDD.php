@@ -1,6 +1,4 @@
-<?php 
-require_once __DIR__ . '/../class/FaceOff.php';
-require_once __DIR__ . '/BaseBDD.php';
+<?php
 
 abstract class FaceOffBDD extends BaseBDD {
     public static function addFaceOff(FaceOff $faceOff): void {
