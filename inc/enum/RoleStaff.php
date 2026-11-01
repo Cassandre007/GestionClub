@@ -6,7 +6,7 @@ enum RoleStaff: string {
     case Technicien = "Technicien";
     case Costumier = "Costumier";
     case Maquilleur = "Maquilleur";
-    case Scénariste = "Scénariste";
-    case RégisseurLumière = "Régisseur lumière";
-    case MetteurEnScène = "Metteur en scène";
+    case Scenariste = "Scénariste";
+    case RegisseurLumiere = "Régisseur lumière";
+    case MetteurEnScene = "Metteur en scène";
 }

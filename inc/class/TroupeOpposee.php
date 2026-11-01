@@ -1,9 +1,14 @@
 <?php
 
 class TroupeOpposee {
-    public function __construct(private string $address, private string $city){
+    public function __construct(private int $id, private string $address, private string $city){
+        $this->id = $id;
         $this->address = $address;
         $this->city = $city;
+    }
+
+    public function getId(): int {
+        return $this->id;
     }
 
     public function getAddress(): string {

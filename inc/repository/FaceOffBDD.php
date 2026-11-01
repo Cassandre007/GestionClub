@@ -1,10 +1,11 @@
 <?php 
 require_once __DIR__ . '/../class/FaceOff.php';
+require_once __DIR__ . '/BaseBDD.php';
 
-abstract class FaceOffBDD extends PDO {
-    public function addFaceOff(FaceOff $faceOff): void {
+abstract class FaceOffBDD extends BaseBDD {
+    public static function addFaceOff(FaceOff $faceOff): void {
         try {
-            $requete = $this->pdo->prepare("INSERT INTO face_off (troupe_score, opponent_score, date, troupe_id, city, opposing_club_id) VALUES (:troupe_score, :opponent_score, :date, :troupe_id, :city, :opposing_club_id)");
+            $requete = self::pdo()->prepare("INSERT INTO battle (troupe_score, opponent_score, date, troupe_id, city, opposing_club_id) VALUES (:troupe_score, :opponent_score, :date, :troupe_id, :city, :opposing_club_id)");
             $requete->bindValue(':troupe_score', $faceOff->getTroupeScore());
             $requete->bindValue(':opponent_score', $faceOff->getOpponentScore());
             $requete->bindValue(':date', $faceOff->getDate()->format('Y-m-d'));
@@ -17,16 +18,31 @@ abstract class FaceOffBDD extends PDO {
         }
     }
 
-    public function getFaceOff(int $id): FaceOff {
+    public static function getAllFaceOffs(): array {
         try {
-            $requete = $this->pdo->prepare("SELECT * FROM face_off WHERE id = :id");
+            $requete = self::pdo()->prepare("SELECT * FROM battle");
+            $requete->execute();
+            $results = $requete->fetchAll(PDO::FETCH_ASSOC);
+            $faceOffs = [];
+            foreach ($results as $result) {
+                $faceOffs[] = new FaceOff($result['id'], $result['troupe_score'], $result['opponent_score'], new DateTime($result['date']), TroupeBDD::getTroupe($result['troupe_id']), $result['city'], TroupeOpposeeBDD::getTroupeOpposee($result['opposing_club_id']));
+            }
+            return $faceOffs;
+        } catch (Exception $e) {
+            throw new Exception("Error retrieving FaceOffs: " . $e->getMessage());
+        }
+    }
+
+    public static function getFaceOff(int $id): FaceOff {
+        try {
+            $requete = self::pdo()->prepare("SELECT * FROM battle WHERE id = :id");
             $requete->bindValue(':id', $id);
             $requete->execute();
             $result = $requete->fetch(PDO::FETCH_ASSOC);
             if (!$result) {
                 throw new Exception("FaceOff not found with ID: " . $id);
             }
-            return new FaceOff($result['troupe_score'], $result['opponent_score'], new DateTime($result['date']), new Troupe($result['troupe_id']), $result['city'], new TroupeOpposee($result['opposing_club_id']));
+            return new FaceOff($result['id'], $result['troupe_score'], $result['opponent_score'], new DateTime($result['date']), TroupeBDD::getTroupe($result['troupe_id']), $result['city'], TroupeOpposeeBDD::getTroupeOpposee($result['opposing_club_id']));
         } catch (Exception $e) {
             throw new Exception("Error retrieving FaceOff: " . $e->getMessage());
         }

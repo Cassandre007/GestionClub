@@ -1,11 +1,16 @@
 <?php
 
 class StaffMember {
-    public function __construct(private string $first_name, private string $last_name, private string $picture, private RoleStaff $role){
+    public function __construct(private int $id, private string $first_name, private string $last_name, private string $picture, private RoleStaff $role){
+        $this->id = $id;
         $this->first_name = $first_name;
         $this->last_name = $last_name;
         $this->picture = $picture;
         $this->role = $role;
+    }
+
+    public function getId(): int {
+        return $this->id;
     }
 
     public function getFirstName(): string {

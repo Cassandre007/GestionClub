@@ -32,15 +32,15 @@ $troupeOpposee3 = new TroupeOpposeeBDD($GLOBALS['pdo'])->addTroupeOpposee("8 ave
 $troupeOpposee4 = new TroupeOpposeeBDD($GLOBALS['pdo'])->addTroupeOpposee("15 rue Nationale","Lille");
 $troupeOpposee5 = new TroupeOpposeeBDD($GLOBALS['pdo'])->addTroupeOpposee("30 boulevard Gambetta","Bordeaux");
 
-$member1 = new StaffMemberBDD($GLOBALS['pdo'])->addStaffMember("Jean", "Dupont", "photo6", RoleStaff::Scénariste);
-$member2 = new StaffMemberBDD($GLOBALS['pdo'])->addStaffMember("Cassandre", "Charbon", "photo7", RoleStaff::RégisseurLumière);
-$member3 = new StaffMemberBDD($GLOBALS['pdo'])->addStaffMember("Elena", "Rousset", "photo8", RoleStaff::MetteurEnScène);
-$member4 = new StaffMemberBDD($GLOBALS['pdo'])->addStaffMember("Léo", "Dicahan", "photo9", RoleStaff::Scénariste);
-$member5 = new StaffMemberBDD($GLOBALS['pdo'])->addStaffMember("Hugo", "Moins", "photo10", RoleStaff::MetteurEnScène);
+$member1 = new StaffMemberBDD($GLOBALS['pdo'])->addStaffMember("Jean", "Dupont", "photo6", RoleStaff::Scenariste);
+$member2 = new StaffMemberBDD($GLOBALS['pdo'])->addStaffMember("Cassandre", "Charbon", "photo7", RoleStaff::RegisseurLumiere);
+$member3 = new StaffMemberBDD($GLOBALS['pdo'])->addStaffMember("Elena", "Rousset", "photo8", RoleStaff::MetteurEnScene);
+$member4 = new StaffMemberBDD($GLOBALS['pdo'])->addStaffMember("Léo", "Dicahan", "photo9", RoleStaff::Scenariste);
+$member5 = new StaffMemberBDD($GLOBALS['pdo'])->addStaffMember("Hugo", "Moins", "photo10", RoleStaff::MetteurEnScene);
 
-$faceOff1 = new FaceOffBDD($GLOBALS['pdo'])->addFaceOff(1, 3, 1, 2026-10-05, $troupe1, "Paris", $troupeOpposee1);
-$faceOff2 = new FaceOffBDD($GLOBALS['pdo'])->addFaceOff(1, 3, 1, 2026-10-12, $troupe2, "Lyon", $troupeOpposee2);
-$faceOff3 = new FaceOffBDD($GLOBALS['pdo'])->addFaceOff(1, 3, 1, 2026-10-19, $troupe3, "Marseille", $troupeOpposee3);
-$faceOff4 = new FaceOffBDD($GLOBALS['pdo'])->addFaceOff(1, 3, 1, 2026-10-26, $troupe4, "Lille", $troupeOpposee4);
-$faceOff5 = new FaceOffBDD($GLOBALS['pdo'])->addFaceOff(1, 3, 1, 2026-11-02, $troupe5, "Bordeaux", $troupeOpposee5);
+$faceOff1 = new FaceOffBDD($GLOBALS['pdo'])->addFaceOff(3, 1, 2026-10-05, $troupe1, "Paris", $troupeOpposee1);
+$faceOff2 = new FaceOffBDD($GLOBALS['pdo'])->addFaceOff(3, 1, 2026-10-12, $troupe2, "Lyon", $troupeOpposee2);
+$faceOff3 = new FaceOffBDD($GLOBALS['pdo'])->addFaceOff(3, 1, 2026-10-19, $troupe3, "Marseille", $troupeOpposee3);
+$faceOff4 = new FaceOffBDD($GLOBALS['pdo'])->addFaceOff(3, 1, 2026-10-26, $troupe4, "Lille", $troupeOpposee4);
+$faceOff5 = new FaceOffBDD($GLOBALS['pdo'])->addFaceOff(3, 1, 2026-11-02, $troupe5, "Bordeaux", $troupeOpposee5);
 

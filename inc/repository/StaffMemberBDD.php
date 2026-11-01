@@ -1,28 +1,46 @@
 <?php
+require_once __DIR__ . '/../enum/RoleStaff.php';
 require_once __DIR__ . '/../class/StaffMember.php';
+require_once __DIR__ . '/BaseBDD.php';
 
-abstract class StaffMembersBDD extends PDO {
-    public function getStaffMember(int $id): StaffMember {
+abstract class StaffMembersBDD extends BaseBDD {
+    public static function getStaffMember(int $id): StaffMember {
         try {
-            $requete = $this->pdo->prepare("SELECT * FROM staff_member WHERE id = :id");
+            $requete = self::pdo()->prepare("SELECT * FROM staff_members WHERE id = :id");
             $requete->bindValue(':id', $id);
             $requete->execute();
             $result = $requete->fetch(PDO::FETCH_ASSOC);
             if ($result === null) {
                 throw new RuntimeException("Aucun membre du personnel trouvé avec l'ID : $id");
             }
-            return new StaffMember($result['id'], $result['first_name'], $result['last_name'], $result['picture'], $result['role']);
+            return new StaffMember($result['id'], $result['firstname'], $result['lastname'], $result['picture'], RoleStaff::from($result['role']));
         } catch (Exception $e) {
             echo "Erreur lors de la récupération du membre du personnel : " . $e->getMessage();
             die();
         }
     }
 
-    public function addStaffMember(StaffMember $staffMember): void {
+    public static function getAllStaffMembers(): array {
         try {
-            $requete = $this->pdo->prepare("INSERT INTO staff_member (first_name, last_name, picture, role) VALUES (:first_name, :last_name, :picture, :role)");
-            $requete->bindValue(':first_name', $staffMember->getFirstName());
-            $requete->bindValue(':last_name', $staffMember->getLastName());
+            $requete = self::pdo()->prepare("SELECT * FROM staff_members");
+            $requete->execute();
+            $results = $requete->fetchAll(PDO::FETCH_ASSOC);
+            $staffMembers = [];
+            foreach ($results as $result) {
+                $staffMembers[] = new StaffMember($result['id'], $result['firstname'], $result['lastname'], $result['picture'], RoleStaff::from($result['role']));
+            }
+            return $staffMembers;
+        } catch (Exception $e) {
+            echo "Erreur lors de la récupération des membres du personnel : " . $e->getMessage();
+            die();
+        }
+    }
+
+    public static function addStaffMember(StaffMember $staffMember): void {
+        try {
+            $requete = self::pdo()->prepare("INSERT INTO staff_members (firstname, lastname, picture, role) VALUES (:firstname, :lastname, :picture, :role)");
+            $requete->bindValue(':firstname', $staffMember->getFirstName());
+            $requete->bindValue(':lastname', $staffMember->getLastName());
             $requete->bindValue(':picture', $staffMember->getPicture());
             $requete->bindValue(':role', $staffMember->getRole());
             $requete->execute();
