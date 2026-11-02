@@ -43,3 +43,4 @@ class StaffMember {
         return $this;
     }
 }
+

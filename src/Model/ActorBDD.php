@@ -46,4 +46,18 @@ abstract class ActorBDD extends BaseBDD {
             throw new Exception("Erreur lors de l'ajout de l'acteur : " . $e->getMessage());
         }
     }
+
+    public static function updateActor(Actor $actor): void {
+        try {
+            $requete = self::pdo()->prepare("UPDATE actors SET firstname = :firstname, lastname = :lastname, birthdate = :birthdate, picture = :picture WHERE id = :id");
+            $requete->bindValue(':firstname', $actor->getFirstName());
+            $requete->bindValue(':lastname', $actor->getLastName());
+            $requete->bindValue(':birthdate', $actor->getBirthDate()->format('Y-m-d'));
+            $requete->bindValue(':picture', $actor->getPicture());
+            $requete->bindValue(':id', $actor->getId(), PDO::PARAM_INT);
+            $requete->execute();
+        } catch (Exception $e) {
+            throw new Exception("Erreur lors de la mise à jour de l'acteur : " . $e->getMessage());
+        }
+    }
 }

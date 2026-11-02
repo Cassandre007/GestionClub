@@ -8,4 +8,13 @@ enum RoleActor: string {
     case Capitaine = "Capitaine";
     case Joueur = "Joueur";
     case Remplacant = "Remplaçant";
+
+    public static function tryFromName(string $name): ?self {
+        foreach (self::cases() as $case) {
+            if ($case->name === $name) {
+                return $case;
+            }
+        }
+        return null;
+    }
 }

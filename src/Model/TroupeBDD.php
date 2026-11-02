@@ -42,4 +42,15 @@ abstract class TroupeBDD extends BaseBDD {
             die();
         }
     }
+
+    public static function updateTroupe(Troupe $troupe): void {
+        try {
+            $requete = self::pdo()->prepare("UPDATE troupe SET name = :name WHERE id = :id");
+            $requete->bindValue(':name', $troupe->getName());
+            $requete->bindValue(':id', $troupe->getId());
+            $requete->execute();
+        } catch (PDOException $e) {
+            echo "Erreur lors de la mise à jour de la troupe : " . $e->getMessage();
+        }
+    }
 }
