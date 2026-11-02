@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $actor1 = new ActorBDD();
 $actor1->addActor("Felix","Plus",2005-03-12,"photo1");

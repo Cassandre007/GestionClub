@@ -18,3 +18,7 @@ npm-debug.log*
 Thumbs.db
 .idea/
 .vscode/
+
+# Dépendances Composer
+/vendor/
+/composer.phar
