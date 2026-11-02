@@ -11,7 +11,7 @@ abstract class ActorHasTroupeBDD extends BaseBDD {
             if ($result === null) {
                 throw new RuntimeException("Aucun association acteur troupe trouvé");
             }
-            return new ActorHasTroupe(ActorBDD::getActor($result['actor_id']), TroupeBDD::getTroupe($result['troupe_id']), RoleActor::{$result['role']});
+            return new ActorHasTroupe(ActorBDD::getActor($result['actor_id']), TroupeBDD::getTroupe($result['troupe_id']), RoleActor::tryFromName($result['role']) ?? RoleActor::tryFrom($result['role']));
         } catch (Exception $e) {
             echo "Erreur lors de la récupération de l'acteur dans la troupe : " . $e->getMessage();
             die();
@@ -26,7 +26,7 @@ abstract class ActorHasTroupeBDD extends BaseBDD {
             $results = $requete->fetchAll(PDO::FETCH_ASSOC);
             $actorsHasTroupes = [];
             foreach ($results as $result) {
-                $actorsHasTroupes[] = new ActorHasTroupe(ActorBDD::getActor($result['actor_id']), TroupeBDD::getTroupe($result['troupe_id']), RoleActor::{$result['role']});
+                $actorsHasTroupes[] = new ActorHasTroupe(ActorBDD::getActor($result['actor_id']), TroupeBDD::getTroupe($result['troupe_id']), RoleActor::tryFromName($result['role']) ?? RoleActor::tryFrom($result['role']));
             }
             return $actorsHasTroupes;
         } catch (Exception $e) {

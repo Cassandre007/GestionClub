@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/../autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../inc/Header.php';
 
 $id = (int) ($_GET['id'] ?? 0);
@@ -13,10 +13,10 @@ if ($actor === null) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $first_name = trim($_POST['first_name'] ?? null);
-    $last_name = trim($_POST['last_name'] ?? null);
-    $birth_date = $_POST['birth_date'] ?? null;
-    $picture = trim($_POST['picture'] ?? null);
+    $first_name = trim($_POST['first_name'] ?? '');
+    $last_name = trim($_POST['last_name'] ?? '');
+    $birth_date = $_POST['birth_date'] ?? '';
+    $picture = trim($_POST['picture'] ?? '');
 
     if ($first_name !== null && $last_name !== null && $birth_date !== null) {
         $newActor = new Actor($actor->getId(),$first_name,$last_name,new DateTime($birth_date),$picture);

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/../autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../inc/Header.php';
 
 $old_actor_id = (int) ($_GET['actor_id'] ?? 0);
@@ -15,11 +15,15 @@ if ($association === null) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $role = RoleActor::tryFromName($_POST['role'] ?? null);
+    $role = RoleActor::tryFromName((string) ($_POST['role'] ?? ''));
     $actor_id = $_POST['actor_id'] ?? null;
     $troupe_id = $_POST['troupe_id'] ?? null;
     if ($role !== null && $actor_id !== null && $troupe_id !== null) {
-        $newActorHasTroupe = new ActorHasTroupe($actor_id, $troupe_id, $role);
+        $newActorHasTroupe = new ActorHasTroupe(
+            ActorBDD::getActor((int) $actor_id),
+            TroupeBDD::getTroupe((int) $troupe_id),
+            $role
+        );
         ActorHasTroupeBDD::updateActorHasTroupe($old_actor_id, $old_troupe_id, $newActorHasTroupe);
         header("Location: index.php");
         exit;
