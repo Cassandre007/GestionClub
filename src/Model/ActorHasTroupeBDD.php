@@ -47,12 +47,14 @@ abstract class ActorHasTroupeBDD extends BaseBDD {
         }
     }
 
-    public static function updateActorHasTroupe(ActorHasTroupe $actorHasTroupe): void {
+    public static function updateActorHasTroupe(int $actor_id, int $troupe_id, ActorHasTroupe $actorHasTroupe): void {
         try {
-            $requete = self::pdo()->prepare("UPDATE actors_has_troupe SET role = :role WHERE actor_id = :actor_id AND troupe_id = :troupe_id");
+            $requete = self::pdo()->prepare("UPDATE actors_has_troupe SET actor_id = :actor_id, troupe_id = :troupe_id, role = :role WHERE actor_id = :old_actor_id AND troupe_id = :old_troupe_id");
             $requete->bindValue(':role', $actorHasTroupe->getRole()->name);
             $requete->bindValue(':actor_id', $actorHasTroupe->getActor()->getId());
             $requete->bindValue(':troupe_id', $actorHasTroupe->getTroupe()->getId());
+            $requete->bindValue(':old_actor_id', $actor_id);
+            $requete->bindValue(':old_troupe_id', $troupe_id);
             $requete->execute();
         } catch (Exception $e) {
             throw new Exception("Erreur lors de la mise à jour de l'acteur dans la troupe : " . $e->getMessage());
