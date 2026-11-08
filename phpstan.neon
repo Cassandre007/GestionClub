@@ -1,0 +1,21 @@
+includes:
+	# Erreurs pré-existantes figées : à corriger puis retirer progressivement
+	# (voir `php vendor/bin/phpstan analyse --generate-baseline`)
+	- phpstan-baseline.neon
+
+parameters:
+	# Niveau 0 (laxiste) à 10 (strict). 5 est un bon point de départ :
+	# vérifie types, valeurs de retour, arguments inconnus, etc.
+	level: 5
+
+	paths:
+		- src
+		- inc
+		- public
+
+	excludePaths:
+		- node_modules
+
+	# Cache placé dans un dossier ignoré par git (sinon PHPStan écrit
+	# dans le dossier temporaire système, ce qui est très lent sur Windows)
+	resultCachePath: %currentWorkingDirectory%/cache/phpstan.resultCache

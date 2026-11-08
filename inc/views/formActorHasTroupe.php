@@ -23,7 +23,7 @@
             <option value="">-- Choisir l'acteur --</option>
             <?php foreach ($listActors as $a): ?>
                 <option value="<?= $a->getId() ?>">
-                    <?= htmlspecialchars($a->getFirstName() . ' ' . $a->getLastName()) ?>
+                    <?= htmlspecialchars($a->getFirstName().' '.$a->getLastName()) ?>
                 </option>
             <?php endforeach; ?>
         </select>

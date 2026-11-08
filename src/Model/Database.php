@@ -1,6 +1,9 @@
 <?php
 
-class Database {
+declare(strict_types=1);
+
+class Database
+{
     private const HOST = 'localhost';
     private const USER = 'root';
     private const PASS = '';
@@ -8,11 +11,12 @@ class Database {
 
     private static ?PDO $instance = null;
 
-    public static function connexionBdd(): PDO {
+    public static function connexionBdd(): PDO
+    {
         if (self::$instance === null) {
             try {
                 self::$instance = new PDO(
-                    "mysql:host=" . self::HOST . ";dbname=" . self::DB_NAME . ";charset=utf8",
+                    'mysql:host='.self::HOST.';dbname='.self::DB_NAME.';charset=utf8',
                     self::USER,
                     self::PASS,
                     [
@@ -21,7 +25,7 @@ class Database {
                     ]
                 );
             } catch (PDOException $e) {
-                die("Erreur de connexion : " . $e->getMessage());
+                die('Erreur de connexion : '.$e->getMessage());
             }
         }
         return self::$instance;

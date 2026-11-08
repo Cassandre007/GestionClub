@@ -1,7 +1,11 @@
 <?php
 
-class StaffMember {
-    public function __construct(private int $id, private string $first_name, private string $last_name, private string $picture, private RoleStaff $role){
+declare(strict_types=1);
+
+class StaffMember
+{
+    public function __construct(private int $id, private string $first_name, private string $last_name, private string $picture, private RoleStaff $role)
+    {
         $this->id = $id;
         $this->first_name = $first_name;
         $this->last_name = $last_name;
@@ -9,38 +13,46 @@ class StaffMember {
         $this->role = $role;
     }
 
-    public function getId(): int {
+    public function getId(): int
+    {
         return $this->id;
     }
 
-    public function getFirstName(): string {
+    public function getFirstName(): string
+    {
         return $this->first_name;
     }
-    public function getLastName(): string {
+    public function getLastName(): string
+    {
         return $this->last_name;
     }
-    public function getPicture(): string {
+    public function getPicture(): string
+    {
         return $this->picture;
     }
-    public function getRole(): RoleStaff {
+    public function getRole(): RoleStaff
+    {
         return $this->role;
     }
 
-    public function setFirstName(string $first_name): static {
+    public function setFirstName(string $first_name): static
+    {
         $this->first_name = $first_name;
         return $this;
     }
-    public function setLastName(string $last_name): static {
+    public function setLastName(string $last_name): static
+    {
         $this->last_name = $last_name;
         return $this;
     }
-    public function setPicture(string $picture): static {
+    public function setPicture(string $picture): static
+    {
         $this->picture = $picture;
         return $this;
     }
-    public function setRole(RoleStaff $role): static {
+    public function setRole(RoleStaff $role): static
+    {
         $this->role = $role;
         return $this;
     }
 }
-

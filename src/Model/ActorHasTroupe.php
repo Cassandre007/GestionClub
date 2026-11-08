@@ -1,39 +1,49 @@
 <?php
 
-class ActorHasTroupe {
+declare(strict_types=1);
+
+class ActorHasTroupe
+{
     private Actor $actor;
     private Troupe $troupe;
     private RoleActor $role;
 
-    public function __construct(Actor $actor, Troupe $troupe, RoleActor $role) {
+    public function __construct(Actor $actor, Troupe $troupe, RoleActor $role)
+    {
         $this->actor = $actor;
         $this->troupe = $troupe;
         $this->role = $role;
     }
 
-    public function getActor(): Actor {
+    public function getActor(): Actor
+    {
         return $this->actor;
     }
 
-    public function getTroupe(): Troupe {
+    public function getTroupe(): Troupe
+    {
         return $this->troupe;
     }
 
-    public function getRole(): RoleActor {
+    public function getRole(): RoleActor
+    {
         return $this->role;
     }
 
-    public function setActor(Actor $actor): static {
+    public function setActor(Actor $actor): static
+    {
         $this->actor = $actor;
         return $this;
     }
 
-    public function setTroupe(Troupe $troupe): static {
+    public function setTroupe(Troupe $troupe): static
+    {
         $this->troupe = $troupe;
         return $this;
     }
 
-    public function setRole(RoleActor $role): static {
+    public function setRole(RoleActor $role): static
+    {
         $this->role = $role;
         return $this;
     }

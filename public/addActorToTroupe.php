@@ -1,8 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
-require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../inc/Header.php';
+require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../src/template/Header.php';
 
 $errors = [];
 
@@ -13,18 +14,18 @@ if ($selectedTroupeId === false || $selectedTroupeId <= 0) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $actorId   = filter_var($_POST['actor_id'] ?? '', FILTER_VALIDATE_INT);
-    $troupeId  = filter_var($_POST['troupe_id'] ?? '', FILTER_VALIDATE_INT);
-    $role      = RoleActor::tryFrom((string)($_POST['role'] ?? ''));
+    $actorId = filter_var($_POST['actor_id'] ?? '', FILTER_VALIDATE_INT);
+    $troupeId = filter_var($_POST['troupe_id'] ?? '', FILTER_VALIDATE_INT);
+    $role = RoleActor::tryFrom((string)($_POST['role'] ?? ''));
 
     if ($actorId === false || $actorId <= 0) {
-        $errors[] = "Il faut choisir un acteur.";
+        $errors[] = 'Il faut choisir un acteur.';
     }
     if ($troupeId === false || $troupeId <= 0) {
-        $errors[] = "Il faut choisir une troupe.";
+        $errors[] = 'Il faut choisir une troupe.';
     }
     if ($role === null) {
-        $errors[] = "Le rôle est invalide.";
+        $errors[] = 'Le rôle est invalide.';
     }
 
     if (empty($errors)) {
@@ -35,17 +36,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $role
             );
             ActorHasTroupeBDD::addActorHasTroupe($actorHasTroupe);
-            header("Location: index.php");
+            header('Location: index.php');
             exit;
         } catch (Exception $e) {
-            $errors[] = "Erreur lors de l'ajout de l'acteur dans la troupe : " . $e->getMessage();
+            $errors[] = "Erreur lors de l'ajout de l'acteur dans la troupe : ".$e->getMessage();
         }
     }
 }
 
 
-$listActors  = ActorBDD::getAllActors();
+$listActors = ActorBDD::getAllActors();
 $listTroupes = TroupeBDD::getAllTroupes();
 
-require_once __DIR__ . '/../inc/views/formActorHasTroupe.php';
-require_once __DIR__ . '/../inc/Footer.php';
+require_once __DIR__.'/../inc/views/formActorHasTroupe.php';
+require_once __DIR__.'/../src/template/Footer.php';

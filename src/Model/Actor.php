@@ -1,13 +1,17 @@
 <?php
 
-class Actor {
+declare(strict_types=1);
+
+class Actor
+{
     protected int $id;
     protected string $first_name;
     protected string $last_name;
     protected DateTime $birth_date;
     protected string $picture;
 
-    public function __construct(int $id, string $first_name, string $last_name, DateTime $birth_date, string $picture) {
+    public function __construct(int $id, string $first_name, string $last_name, DateTime $birth_date, string $picture)
+    {
         $this->id = $id;
         $this->first_name = $first_name;
         $this->last_name = $last_name;
@@ -15,43 +19,53 @@ class Actor {
         $this->picture = $picture;
     }
 
-    public function getId(): int {
+    public function getId(): int
+    {
         return $this->id;
     }
 
-    public function getFirstName(): string {
+    public function getFirstName(): string
+    {
         return $this->first_name;
     }
 
-    public function getLastName(): string {
+    public function getLastName(): string
+    {
         return $this->last_name;
     }
 
-    public function getBirthDate(): DateTime {
+    public function getBirthDate(): DateTime
+    {
         return $this->birth_date;
     }
 
-    public function getPicture(): string {
+    public function getPicture(): string
+    {
         return $this->picture;
     }
 
-    public function setFirstName(string $first_name): static {
+    public function setFirstName(string $first_name): static
+    {
         $this->first_name = $first_name;
 
         return $this;
     }
 
-    public function setLastName(string $last_name): static {
-        $this->last_name = $last_name ;
+    public function setLastName(string $last_name): static
+    {
+        $this->last_name = $last_name;
+
         return $this;
     }
 
-    public function setBirthDate(DateTime $birth_date): static {
+    public function setBirthDate(DateTime $birth_date): static
+    {
         $this->birth_date = $birth_date ;
         return $this;
     }
 
-    public function setPicture(string $picture): static {
+    public function setPicture(string $picture): static
+    {
         $this->picture = $picture ;
         return $this;
     }

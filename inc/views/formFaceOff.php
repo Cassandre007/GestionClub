@@ -20,7 +20,7 @@
         <select id="opponent_id" name="opponent_id" class="select select-bordered w-full" required>
             <option value="">-- Choisir la troupe opposée --</option>
             <?php foreach ($listTroupesOpposees as $o): ?>
-                <option value="<?= $o->getId() ?>"><?= htmlspecialchars($o->getAddress() . ' (' . $o->getCity() . ')') ?></option>
+                <option value="<?= $o->getId() ?>"><?= htmlspecialchars($o->getAddress().' ('.$o->getCity().')') ?></option>
             <?php endforeach; ?>
         </select>
 

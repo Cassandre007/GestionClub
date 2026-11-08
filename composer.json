@@ -9,5 +9,18 @@
         "classmap": [
             "src/Model"
         ]
+    },
+    "require-dev": {
+        "phpstan/phpstan": "*",
+        "friendsofphp/php-cs-fixer": "*"
+    },
+    "scripts": {
+        "cs-check": "php-cs-fixer check --diff --verbose",
+        "cs-fix": "php-cs-fixer fix --verbose",
+        "phpstan": "phpstan analyse --memory-limit=1G",
+        "check": [
+            "@cs-check",
+            "@phpstan"
+        ]
     }
 }

@@ -1,28 +1,37 @@
 <?php
 
-class TroupeOpposee {
-    public function __construct(private int $id, private string $address, private string $city){
+declare(strict_types=1);
+
+class TroupeOpposee
+{
+    public function __construct(private int $id, private string $address, private string $city)
+    {
         $this->id = $id;
         $this->address = $address;
         $this->city = $city;
     }
 
-    public function getId(): int {
+    public function getId(): int
+    {
         return $this->id;
     }
 
-    public function getAddress(): string {
+    public function getAddress(): string
+    {
         return $this->address;
     }
-    public function getCity(): string {
+    public function getCity(): string
+    {
         return $this->city;
     }
 
-    public function setAddress(string $address): static {
+    public function setAddress(string $address): static
+    {
         $this->address = $address;
         return $this;
     }
-    public function setCity(string $city): static {
+    public function setCity(string $city): static
+    {
         $this->city = $city;
         return $this;
     }

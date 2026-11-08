@@ -1,0 +1,121 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Variable \$listActors might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: inc/views/formActorHasTroupe.php
+
+		-
+			message: '#^Variable \$listTroupes might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: inc/views/formActorHasTroupe.php
+
+		-
+			message: '#^Variable \$selectedTroupeId might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: inc/views/formActorHasTroupe.php
+
+		-
+			message: '#^Variable \$listTroupes might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: inc/views/formFaceOff.php
+
+		-	A2
+			message: '#^Variable \$listTroupesOpposees might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: inc/views/formFaceOff.php
+
+		-
+			message: '#^File ends with a trailing whitespace\. This may cause problems when running the code in the web browser\. Remove the closing \?\> mark or remove the whitespace\.$#'
+			identifier: whitespace.fileEnd
+			count: 1
+			path: public/index.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 2
+			path: public/updateActor.php
+
+		-
+			message: '#^Result of && is always true\.$#'
+			identifier: booleanAnd.alwaysTrue
+			count: 2
+			path: public/updateActor.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between mixed and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: public/updateActor.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 2
+			path: public/updateActor.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between Actor and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: public/updateActor.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: public/updateActor.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: public/updateActorHasTroupe.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between ActorHasTroupe and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: public/updateActorHasTroupe.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: public/updateTroupe.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between Troupe and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: public/updateTroupe.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between array\<string, mixed\>\|false and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Model/ActorBDD.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between array\<string, mixed\>\|false and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Model/ActorHasTroupeBDD.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between array\<string, mixed\>\|false and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Model/StaffMembersBDD.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between array\<string, mixed\>\|false and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Model/TroupeBDD.php

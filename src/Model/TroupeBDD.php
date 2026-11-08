@@ -1,19 +1,24 @@
 <?php
 
-abstract class TroupeBDD extends BaseBDD {
-    public static function addTroupe(Troupe $troupe): void {
+declare(strict_types=1);
+
+abstract class TroupeBDD extends BaseBDD
+{
+    public static function addTroupe(Troupe $troupe): void
+    {
         try {
-            $requete = self::pdo()->prepare("INSERT INTO troupe (name) VALUES (:name)");
+            $requete = self::pdo()->prepare('INSERT INTO troupe (name) VALUES (:name)');
             $requete->bindValue(':name', $troupe->getName());
             $requete->execute();
         } catch (PDOException $e) {
-            echo "Erreur lors de l'ajout de la troupe : " . $e->getMessage();
+            echo "Erreur lors de l'ajout de la troupe : ".$e->getMessage();
         }
     }
 
-    public static function getAllTroupes(): array {
+    public static function getAllTroupes(): array
+    {
         try {
-            $requete = self::pdo()->prepare("SELECT * FROM troupe");
+            $requete = self::pdo()->prepare('SELECT * FROM troupe');
             $requete->execute();
             $results = $requete->fetchAll(PDO::FETCH_ASSOC);
             $troupes = [];
@@ -22,14 +27,15 @@ abstract class TroupeBDD extends BaseBDD {
             }
             return $troupes;
         } catch (PDOException $e) {
-            echo "Erreur lors de la récupération des troupes : " . $e->getMessage();
+            echo 'Erreur lors de la récupération des troupes : '.$e->getMessage();
             die();
         }
     }
 
-    public static function getTroupe(int $id): Troupe {
+    public static function getTroupe(int $id): Troupe
+    {
         try {
-            $requete = self::pdo()->prepare("SELECT * FROM troupe WHERE id = :id");
+            $requete = self::pdo()->prepare('SELECT * FROM troupe WHERE id = :id');
             $requete->bindValue(':id', $id);
             $requete->execute();
             $result = $requete->fetch(PDO::FETCH_ASSOC);
@@ -38,19 +44,43 @@ abstract class TroupeBDD extends BaseBDD {
             }
             return new Troupe($id, $result['name']);
         } catch (Exception $e) {
-            echo "Erreur lors de la récupération de la troupe : " . $e->getMessage();
+            echo 'Erreur lors de la récupération de la troupe : '.$e->getMessage();
             die();
         }
     }
 
-    public static function updateTroupe(Troupe $troupe): void {
+    public static function updateTroupe(Troupe $troupe): void
+    {
         try {
-            $requete = self::pdo()->prepare("UPDATE troupe SET name = :name WHERE id = :id");
+            $requete = self::pdo()->prepare('UPDATE troupe SET name = :name WHERE id = :id');
             $requete->bindValue(':name', $troupe->getName());
             $requete->bindValue(':id', $troupe->getId());
             $requete->execute();
         } catch (PDOException $e) {
-            echo "Erreur lors de la mise à jour de la troupe : " . $e->getMessage();
+            echo 'Erreur lors de la mise à jour de la troupe : '.$e->getMessage();
+        }
+    }
+
+    public static function deleteTroupe(int $id): void
+    {
+        $pdo = self::pdo();
+
+        try {
+            $pdo->beginTransaction();
+
+            $requete = $pdo->prepare('DELETE FROM actors_has_troupe WHERE troupe_id = :id');
+            $requete->bindValue(':id', $id, PDO::PARAM_INT);
+            $requete->execute();
+
+            $requete = $pdo->prepare('DELETE FROM troupe WHERE id = :id');
+            $requete->bindValue(':id', $id, PDO::PARAM_INT);
+            $requete->execute();
+            $pdo->commit();
+        } catch (PDOException $e) {
+            if ($pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+            throw new RuntimeException("Erreur lors de la suppression de la troupe : ".$e->getMessage(), 0, $e);
         }
     }
 }

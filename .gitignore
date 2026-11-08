@@ -22,3 +22,9 @@ Thumbs.db
 # Dépendances Composer
 /vendor/
 /composer.phar
+
+# Caches des outils qualité
+.php-cs-fixer.cache
+.php-cs-fixer.cache.*
+/cache/
+

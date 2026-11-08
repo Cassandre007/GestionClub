@@ -1,9 +1,13 @@
 <?php
 
-abstract class StaffMembersBDD extends BaseBDD {
-    public static function getStaffMember(int $id): StaffMember {
+declare(strict_types=1);
+
+abstract class StaffMembersBDD extends BaseBDD
+{
+    public static function getStaffMember(int $id): StaffMember
+    {
         try {
-            $requete = self::pdo()->prepare("SELECT * FROM staff_members WHERE id = :id");
+            $requete = self::pdo()->prepare('SELECT * FROM staff_members WHERE id = :id');
             $requete->bindValue(':id', $id);
             $requete->execute();
             $result = $requete->fetch(PDO::FETCH_ASSOC);
@@ -12,14 +16,15 @@ abstract class StaffMembersBDD extends BaseBDD {
             }
             return new StaffMember($result['id'], $result['firstname'], $result['lastname'], $result['picture'], RoleStaff::tryFromName($result['role']) ?? RoleStaff::tryFrom($result['role']));
         } catch (Exception $e) {
-            echo "Erreur lors de la récupération du membre du personnel : " . $e->getMessage();
+            echo 'Erreur lors de la récupération du membre du personnel : '.$e->getMessage();
             die();
         }
     }
 
-    public static function getAllStaffMembers(): array {
+    public static function getAllStaffMembers(): array
+    {
         try {
-            $requete = self::pdo()->prepare("SELECT * FROM staff_members");
+            $requete = self::pdo()->prepare('SELECT * FROM staff_members');
             $requete->execute();
             $results = $requete->fetchAll(PDO::FETCH_ASSOC);
             $staffMembers = [];
@@ -28,21 +33,48 @@ abstract class StaffMembersBDD extends BaseBDD {
             }
             return $staffMembers;
         } catch (Exception $e) {
-            echo "Erreur lors de la récupération des membres du personnel : " . $e->getMessage();
+            echo 'Erreur lors de la récupération des membres du personnel : '.$e->getMessage();
             die();
         }
     }
 
-    public static function addStaffMember(StaffMember $staffMember): void {
+    public static function addStaffMember(StaffMember $staffMember): void
+    {
         try {
-            $requete = self::pdo()->prepare("INSERT INTO staff_members (firstname, lastname, picture, role) VALUES (:firstname, :lastname, :picture, :role)");
+            $requete = self::pdo()->prepare('INSERT INTO staff_members (firstname, lastname, picture, role) VALUES (:firstname, :lastname, :picture, :role)');
             $requete->bindValue(':firstname', $staffMember->getFirstName());
             $requete->bindValue(':lastname', $staffMember->getLastName());
             $requete->bindValue(':picture', $staffMember->getPicture());
             $requete->bindValue(':role', $staffMember->getRole()->name);
             $requete->execute();
         } catch (Exception $e) {
-            throw new Exception("Erreur lors de l'ajout du membre du personnel : " . $e->getMessage());
+            throw new Exception("Erreur lors de l'ajout du membre du personnel : ".$e->getMessage());
+        }
+    }
+
+    public static function updateStaffMember(StaffMember $staffMember): void
+    {
+        try {
+            $requete = self::pdo()->prepare('UPDATE staff_members SET firstname = :firstname, lastname = :lastname, picture = :picture, role = :role WHERE id = :id');
+            $requete->bindValue(':firstname', $staffMember->getFirstName());
+            $requete->bindValue(':lastname', $staffMember->getLastName());
+            $requete->bindValue(':picture', $staffMember->getPicture());
+            $requete->bindValue(':role', $staffMember->getRole()->name);
+            $requete->bindValue(':id', $staffMember->getId(), PDO::PARAM_INT);
+            $requete->execute();
+        } catch (Exception $e) {
+            throw new Exception("Erreur lors de la mise à jour du membre du personnel : ".$e->getMessage());
+        }
+    }
+
+    public static function deleteStaffMember(int $id): void
+    {
+        try {
+            $requete = self::pdo()->prepare('DELETE FROM staff_members WHERE id = :id');
+            $requete->bindValue(':id', $id, PDO::PARAM_INT);
+            $requete->execute();
+        } catch (Exception $e) {
+            throw new Exception("Erreur lors de la suppression du membre du personnel : ".$e->getMessage());
         }
     }
 }
