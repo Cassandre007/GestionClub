@@ -11,8 +11,8 @@
         ]
     },
     "require-dev": {
-        "phpstan/phpstan": "*",
-        "friendsofphp/php-cs-fixer": "*"
+        "phpstan/phpstan": "2.3.5",
+        "friendsofphp/php-cs-fixer": "3.95.29"
     },
     "scripts": {
         "cs-check": "php-cs-fixer check --diff --verbose",

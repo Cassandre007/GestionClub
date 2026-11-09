@@ -41,9 +41,10 @@ abstract class ActorBDD extends BaseBDD
 
     public static function hasHomonym(string $firstName, string $lastName, ?int $excludedActorId = null): bool
     {
-        $sql = 'SELECT 1 FROM actors WHERE firstname = :firstname AND lastname = :lastname';
         if ($excludedActorId !== null) {
-            $sql .= ' AND id <> :id';
+            $sql = 'SELECT * FROM actors WHERE firstname = :firstname AND lastname = :lastname AND id <> :id';
+        } else {
+            $sql = 'SELECT * FROM actors WHERE firstname = :firstname AND lastname = :lastname';
         }
         $requete = self::pdo()->prepare($sql.' LIMIT 1');
         $requete->bindValue(':firstname', $firstName);
